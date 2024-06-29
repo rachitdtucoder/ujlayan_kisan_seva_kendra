@@ -1,4 +1,4 @@
-localstorage.clear();
+localStorage.clear();
 // Initialize or retrieve transactions from localStorage
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 let medicinesInventory = JSON.parse(localStorage.getItem('medicinesInventory')) || {};
@@ -116,13 +116,9 @@ function editAmountPending(id) {
 }
 
 function deleteTransaction(id) {
-    const transactionToDelete = transactions.find(transaction => transaction.id === id);
-    if (transactionToDelete) {
-        updateMedicineInventory(transactionToDelete.medicine, transactionToDelete.quantity); // Add back to inventory on delete
-        transactions = transactions.filter(transaction => transaction.id !== id);
-        saveDataToLocalStorage(); // Save data to localStorage
-        displayTransactions();
-    }
+    transactions = transactions.filter(transaction => transaction.id !== id);
+    saveDataToLocalStorage(); // Save data to localStorage
+    displayTransactions();
 }
 
 function searchCustomer() {
@@ -169,4 +165,5 @@ document.getElementById('searchInput').addEventListener('keyup', searchCustomer)
 
 // Display initial transactions
 displayTransactions();
+
 
